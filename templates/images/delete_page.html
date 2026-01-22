@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Удаление изображения</title>
+</head>
+<body>
+    <h1>Удаление изображения</h1>
+    <img src="{{ image.file.url }}" width="300">
+    <p>Вы уверены, что хотите удалить это изображение?</p>
+
+    <form action="{% url 'image-delete' image.uuid %}" method="post" style="display:inline;">
+    {% csrf_token %}
+  <button type="submit">Удалить</button>
+    </form>
+
+    <p><a href="/images/list/">Назад к списку изображений</a></p>
+</body>
+</html>

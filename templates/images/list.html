@@ -1,0 +1,14 @@
+<ul>
+{% for image in images %}
+  <li>
+    <a href="/image/{{ image.uuid }}/">{{ image.original_name }}</a>
+    <!-- кнопка удаления -->
+    <form action="/image/{{ image.uuid }}/delete/" method="post" style="display:inline;">
+      {% csrf_token %}
+      <button type="submit">Удалить</button>
+    </form>
+  </li>
+{% endfor %}
+</ul>
+
+<a href="/images/">Upload</a>

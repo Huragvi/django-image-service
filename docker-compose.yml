@@ -15,6 +15,74 @@ services:
       db:
         condition: service_healthy
 
+  analyzer_api:
+    build: .
+    container_name: analyzer_api
+    command: uvicorn analyzer_service.main:app --host 0.0.0.0 --port 8010
+    volumes:
+      - .:/app
+      - ./media:/app/media
+    ports:
+      - "8010:8010"
+    environment:
+      CELERY_BROKER_URL: redis://redis:6379/0
+      CELERY_RESULT_BACKEND: redis://redis:6379/0
+      SMTP_HOST: mailhog
+      SMTP_PORT: 1025
+    depends_on:
+      redis:
+        condition: service_healthy
+      mailhog:
+        condition: service_started
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8010/health')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  celery_worker:
+    build: .
+    container_name: analyzer_worker
+    command: celery -A analyzer_service.infrastructure.tasks worker --loglevel=info
+    volumes:
+      - .:/app
+      - ./media:/app/media
+    environment:
+      CELERY_BROKER_URL: redis://redis:6379/0
+      CELERY_RESULT_BACKEND: redis://redis:6379/0
+      SMTP_HOST: mailhog
+      SMTP_PORT: 1025
+    depends_on:
+      redis:
+        condition: service_healthy
+      mailhog:
+        condition: service_started
+    healthcheck:
+      test: ["CMD", "celery", "-A", "analyzer_service.infrastructure.tasks", "inspect", "ping"]
+      interval: 20s
+      timeout: 10s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: redis
+    volumes:
+      - redis_data:/data
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  mailhog:
+    image: mailhog/mailhog:latest
+    container_name: mailhog
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+
   db:
     image: postgres:16
     container_name: postgres_db
@@ -34,3 +102,4 @@ services:
 
 volumes:
   postgres_data:
+  redis_data:

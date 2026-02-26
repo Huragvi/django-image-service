@@ -9,6 +9,7 @@ RUN apt-get update && apt-get install -y \
     gcc \
     libpq-dev \
     netcat-openbsd \
+    tesseract-ocr \
     && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt .
@@ -16,6 +17,7 @@ RUN pip install --upgrade pip && pip install -r requirements.txt
 
 COPY . .
 COPY entrypoint.sh /entrypoint.sh
+RUN sed -i "s/\r$//" /entrypoint.sh && chmod +x /entrypoint.sh
 
 ENTRYPOINT ["/entrypoint.sh"]
 

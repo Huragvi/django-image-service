@@ -18,6 +18,7 @@ services:
   analyzer_api:
     build: .
     container_name: analyzer_api
+    entrypoint: ["/entrypoint.analyzer.sh"]
     command: uvicorn analyzer_service.main:app --host 0.0.0.0 --port 8010
     volumes:
       - .:/app
@@ -43,6 +44,7 @@ services:
   celery_worker:
     build: .
     container_name: analyzer_worker
+    entrypoint: ["/entrypoint.analyzer.sh"]
     command: celery -A analyzer_service.infrastructure.tasks worker --loglevel=info
     volumes:
       - .:/app

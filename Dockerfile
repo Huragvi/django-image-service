@@ -17,8 +17,10 @@ RUN pip install --upgrade pip && pip install -r requirements.txt
 
 COPY . .
 COPY entrypoint.sh /entrypoint.sh
+COPY entrypoint.analyzer.sh /entrypoint.analyzer.sh
+RUN sed -i "s/\r$//" /entrypoint.sh /entrypoint.analyzer.sh && chmod +x /entrypoint.sh /entrypoint.analyzer.sh
 
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["sh", "/entrypoint.sh"]
 
 EXPOSE 8000
 

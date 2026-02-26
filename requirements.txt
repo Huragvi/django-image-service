@@ -3,3 +3,14 @@ djangorestframework
 Pillow
 psycopg2-binary
 gunicorn
+
+fastapi
+uvicorn[standard]
+celery[redis]
+redis
+pytesseract
+email-validator
+
+pytest
+pytest-cov
+httpx

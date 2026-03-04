@@ -1,0 +1,11 @@
+stages:
+  - check
+
+health-check:
+  stage: check
+  script:
+    - echo "CI/CD pipeline is working!"
+    - echo "Project is ready for further development"
+  only:
+    - main
+    - Py_git

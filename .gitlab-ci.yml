@@ -5,12 +5,12 @@ stages:
 test-runner:
   stage: test
   script:
-    - echo "===== ТЕСТИРОВАНИЕ РАННЕРА ====="
-    - echo "Раннер успешно запущен!"
-#    - echo "Текущая директория: %cd%"
-    - echo "Список файлов:"
+    - echo "========== TESTING RUNNER =========="
+    - echo "Runner successfully started!"
+    - echo "Current directory: %cd%"
+    - echo "File list:"
     - dir
-    - echo "===== ТЕСТ ЗАВЕРШЕН ====="
+    - echo "========== TEST COMPLETED =========="
   tags:
     - windows
     - local
@@ -19,11 +19,11 @@ test-runner:
 health-check:
   stage: health-check
   script:
-    - echo "===== ПРОВЕРКА HEALTH CHECK ====="
-    - echo "Проверяем, что сервис работает"
-    - echo "Можно добавить curl запрос к /health эндпоинту"
+    - echo "========== HEALTH CHECK =========="
+    - echo "Checking if service is working"
+    - echo "You can add curl request to /health endpoint"
     - echo "curl http://localhost:8000/health"
-    - echo "===== ПРОВЕРКА ЗАВЕРШЕНА ====="
+    - echo "========== CHECK COMPLETED =========="
   tags:
     - fastapi
     - windows

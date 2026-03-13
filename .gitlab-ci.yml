@@ -10,9 +10,10 @@ test-runner:
     - echo "Creating build directory and files..."
     - mkdir build
     - 'echo "Build version 1.0" > build/version.txt'
-    - 'echo "Build timestamp: %date% %time%" >> build/timestamp.txt'
+    - 'echo "Build timestamp: $(Get-Date)" > build/timestamp.txt'
     - echo "File list:"
     - dir
+    - dir build        # ← ВОТ ЭТУ СТРОКУ НУЖНО ДОБАВИТЬ
     - echo "========== TEST COMPLETED =========="
   artifacts:
     paths:
@@ -25,6 +26,5 @@ health-check:
   script:
     - echo "========== HEALTH CHECK =========="
     - echo "Checking if service is working"
-    - echo "You can add curl request to /health endpoint"
     - echo "curl http://localhost:8000/health"
     - echo "========== CHECK COMPLETED =========="

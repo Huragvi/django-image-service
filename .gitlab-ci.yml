@@ -7,7 +7,7 @@ test-runner:
   script:
     - echo "========== TESTING RUNNER =========="
     - echo "Runner successfully started!"
-#    - echo "Current directory:cd
+    - echo "Current directory: %cd%"
     - echo "File list:"
     - dir
     - echo "========== TEST COMPLETED =========="
@@ -27,3 +27,4 @@ health-check:
   tags:
     - fastapi
     - windows
+

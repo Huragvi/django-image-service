@@ -19,3 +19,5 @@ health-check:
     - echo "You can add curl request to /health endpoint"
     - echo "curl http://localhost:8000/health"
     - echo "========== CHECK COMPLETED =========="
+
+      # tags:  <-- закомментировано или удалено

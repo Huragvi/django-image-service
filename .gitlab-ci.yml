@@ -9,8 +9,8 @@ test-runner:
     - echo "Runner successfully started!"
     - echo "Creating build directory and files..."
     - mkdir build
-    - echo Build version 1.0 > build\version.txt
-    - echo Build timestamp: %date% %time% >> build\timestamp.txt
+    - echo "Build version 1.0" > build\version.txt
+    - echo "Build timestamp: %date% %time%" >> build\timestamp.txt
     - echo "File list:"
     - dir
     - echo "========== TEST COMPLETED =========="

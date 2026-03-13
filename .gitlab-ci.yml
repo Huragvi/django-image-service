@@ -20,4 +20,3 @@ health-check:
     - echo "curl http://localhost:8000/health"
     - echo "========== CHECK COMPLETED =========="
 
-      # tags:  <-- закомментировано или удалено

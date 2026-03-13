@@ -10,10 +10,6 @@ test-runner:
     - echo "File list:"
     - dir
     - echo "========== TEST COMPLETED =========="
-  tags:
-    - windows
-    - local
-    - my-runner
 
 health-check:
   stage: health-check
@@ -23,6 +19,3 @@ health-check:
     - echo "You can add curl request to /health endpoint"
     - echo "curl http://localhost:8000/health"
     - echo "========== CHECK COMPLETED =========="
-  tags:
-    - fastapi
-    - windows
